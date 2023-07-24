@@ -1,0 +1,1 @@
+{ "default": { "gctools": { "baseline": "1.0.6", "port-version": 1 }, "libogc": { "baseline": "2.4.1", "port-version": 1 } } }
