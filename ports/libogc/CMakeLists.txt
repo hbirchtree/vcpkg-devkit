@@ -1,5 +1,5 @@
 cmake_minimum_required(VERSION 3.0)
-project(libogc LANGUAGES C CXX)
+project(libogc LANGUAGES C CXX ASM)
 
 include_directories(
   ${CMAKE_CURRENT_SOURCE_DIR}/gc
@@ -128,126 +128,13 @@ install(
   LIBRARY DESTINATION ${CMAKE_INSTALL_LIBDIR}
 )
 install(
-  FILES
-gc/aesndlib.h
-gc/asndlib.h
-gc/debug.h
-gc/gcbool.h
-gc/gccore.h
-gc/gcmodplay.h
-gc/gctypes.h
-gc/gcutil.h
-gc/iso9660.h
-gc/mad.h
-gc/mp3player.h
-gc/network.h
-gc/ogcsys.h
-gc/samplerate.h
-gc/smb.h
-
-gc/ipv4/lwip/icmp.h
-gc/ipv4/lwip/inet.h
-gc/ipv4/lwip/ip_addr.h
-gc/ipv4/lwip/ip_frag.h
-gc/ipv4/lwip/ip.h
-
-gc/lwip/api.h
-gc/lwip/api_msg.h
-gc/lwip/arch.h
-gc/lwip/debug.h
-gc/lwip/def.h
-gc/lwip/dhcp.h
-gc/lwip/err.h
-gc/lwip/lwipopts.h
-gc/lwip/mem.h
-gc/lwip/memp.h
-gc/lwip/netif.h
-gc/lwip/opt.h
-gc/lwip/pbuf.h
-gc/lwip/raw.h
-gc/lwip/sio.h
-gc/lwip/snmp.h
-gc/lwip/sockets.h
-gc/lwip/stats.h
-gc/lwip/sys.h
-gc/lwip/tcp.h
-gc/lwip/tcpip.h
-gc/lwip/udp.h
-
-gc/netif/gcif/gcif.h
-gc/netif/etharp.h
-gc/netif/arch/init.h
-gc/netif/arch/cpu.h
-gc/netif/arch/lib.h
-gc/netif/arch/perf.h
-gc/netif/arch/cc.h
-gc/netif/arch/sys_arch.h
-gc/netif/loopif.h
-
-gc/ogc/aes.h
-gc/ogc/aram.h
-gc/ogc/arqmgr.h
-gc/ogc/arqueue.h
-gc/ogc/audio.h
-gc/ogc/cache.h
-gc/ogc/card.h
-gc/ogc/cast.h
-gc/ogc/color.h
-gc/ogc/cond.h
-gc/ogc/conf.h
-gc/ogc/consol.h
-gc/ogc/context.h
-gc/ogc/disc_io.h
-gc/ogc/dsp.h
-gc/ogc/dvd.h
-gc/ogc/es.h
-gc/ogc/exi.h
-gc/ogc/gu.h
-gc/ogc/gx.h
-gc/ogc/gx_struct.h
-gc/ogc/ios.h
-gc/ogc/ipc.h
-gc/ogc/irq.h
-gc/ogc/isfs.h
-gc/ogc/lwp_config.h
-gc/ogc/lwp.h
-gc/ogc/lwp_heap.h
-gc/ogc/lwp_messages.h
-gc/ogc/lwp_mutex.h
-gc/ogc/lwp_objmgr.h
-gc/ogc/lwp_priority.h
-gc/ogc/lwp_queue.h
-gc/ogc/lwp_sema.h
-gc/ogc/lwp_stack.h
-gc/ogc/lwp_states.h
-gc/ogc/lwp_threadq.h
-gc/ogc/lwp_threads.h
-gc/ogc/lwp_tqdata.h
-gc/ogc/lwp_watchdog.h
-gc/ogc/lwp_wkspace.h
-gc/ogc/message.h
-gc/ogc/mutex.h
-gc/ogc/pad.h
-gc/ogc/semaphore.h
-gc/ogc/sha.h
-gc/ogc/si.h
-gc/ogc/stm.h
-gc/ogc/sys_state.h
-gc/ogc/system.h
-gc/ogc/texconv.h
-gc/ogc/tpl.h
-gc/ogc/usbgecko.h
-gc/ogc/usb.h
-gc/ogc/usbmouse.h
-gc/ogc/usbstorage.h
-gc/ogc/video.h
-gc/ogc/video_types.h
-gc/ogc/wiilaunch.h
-
-gc/sys/mkdev.h
-
-${CMAKE_CURRENT_BINARY_DIR}/include/libversion.h
-  DESTINATION ${CMAKE_INSTALL_PREFIX}/include/ogc/
+  DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}/gc/
+  DESTINATION ${CMAKE_INSTALL_PREFIX}/include
+  FILES_MATCHING PATTERN "*.h" PATTERN "*.inc"
+)
+install(
+  FILES ${CMAKE_CURRENT_BINARY_DIR}/include/libversion.h
+  DESTINATION ${CMAKE_INSTALL_PREFIX}/include/ogc
 )
 
 include(CMakePackageConfigHelpers)
