@@ -1,7 +1,7 @@
 vcpkg_download_distfile(ARCHIVE
-    URLS https://github.com/devkitPro/libogc/archive/refs/tags/v2.4.1.tar.gz
+    URLS https://github.com/devkitPro/libogc/archive/refs/tags/v3.1.0.tar.gz
     FILENAME ${PORT}.tar.gz
-    SHA512 120615fd2af1a439160f3a6e9ce5b7f093911429f7124cb40533edaa520902f26c7ffffbbf1348b7009bb93b3975de960ee6d432863a6e293c60a0e9317c4816
+    SHA512 e484fdb27ed73d703302fc0f78abd9a1eaf18291399764ac9b4c747815e2f8e8396923a889a16ba032087886d093fd3be88c4e91285ad7fc062f0cba8395c577
 )
 
 vcpkg_extract_source_archive(
@@ -18,4 +18,4 @@ vcpkg_cmake_configure(
 
 vcpkg_cmake_install()
 
-file(INSTALL ${SOURCE_PATH}/libogc_license.txt DESTINATION ${CURRENT_PACKAGES_DIR}/share/${PORT} RENAME copyright)
+file(INSTALL ${SOURCE_PATH}/LICENSE DESTINATION ${CURRENT_PACKAGES_DIR}/share/${PORT} RENAME copyright)
