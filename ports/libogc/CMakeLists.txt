@@ -28,6 +28,7 @@ file(WRITE ${CMAKE_CURRENT_BINARY_DIR}/include/libversion.h
 # Shared include dirs (mirrors upstream libogc_inc INTERFACE).
 set(LIBOGC_INCLUDES
     ${CMAKE_CURRENT_SOURCE_DIR}/gc
+    ${CMAKE_CURRENT_SOURCE_DIR}/libdb
     ${CMAKE_CURRENT_SOURCE_DIR}/libogc
     ${CMAKE_CURRENT_SOURCE_DIR}/tuxedo
     ${CMAKE_CURRENT_SOURCE_DIR}/gc/netif
@@ -184,12 +185,35 @@ add_library(tinysmb STATIC
 target_include_directories(tinysmb PRIVATE ${LIBOGC_INCLUDES} INTERFACE $<INSTALL_INTERFACE:include>)
 target_compile_options(tinysmb PRIVATE ${LIBOGC_OPTS})
 
+#----------------------------------------------------------------------------
+# libdb - GDB stub over TCP/Gecko
+#----------------------------------------------------------------------------
+add_library(gdbstub STATIC
+    libdb/uIP/bba.c
+    libdb/uIP/memb.c
+    libdb/uIP/memr.c
+    libdb/uIP/uip_arch.c
+    libdb/uIP/uip_arp.c
+    libdb/uIP/uip_icmp.c
+    libdb/uIP/uip_ip.c
+    libdb/uIP/uip_netif.c
+    libdb/uIP/uip_pbuf.c
+    libdb/uIP/uip_tcp.c
+    
+    libdb/debug.c
+    libdb/debug_supp.c
+    libdb/geckousb.c
+    libdb/tcpip.c
+)
+target_include_directories(gdbstub PRIVATE ${LIBOGC_INCLUDES} INTERFACE $<INSTALL_INTERFACE:include>)
+target_compile_options(gdbstub PRIVATE ${LIBOGC_OPTS})
+
 # ---------------------------------------------------------------------------
 # Install: archives, headers (devkitPPC layout so <gccore.h> and <ogc/*.h>
 # both resolve from one include/), and the generated version header.
 # ---------------------------------------------------------------------------
 install(
-    TARGETS libogc tinysmb
+    TARGETS gdbstub libogc tinysmb
     EXPORT libogc
     ARCHIVE DESTINATION ${CMAKE_INSTALL_LIBDIR}
 )
